@@ -4,8 +4,8 @@ const userSchema = new mong.Schema({
     username: {
         type: String,
         required: [true, "Username is required"],
-        minlength: [3, 'Minimum Length is 5'],
-        maxlength: 20,
+        minlength: [3, "Username must be at least 3 characters"],
+        maxlength: [20, "Username cannot exceed 20 characters"],
         trim : true
     },
     email: {
@@ -39,11 +39,15 @@ const userSchema = new mong.Schema({
         type: Number,
         default: 1,
     },
-    height: {
-        type: Number,
+    height:{
+        type:Number,
+        min:50,
+        max:250
     },
-    currentWeight: {
-        type: Number,
+    currentWeight:{
+        type:Number,
+        min:20,
+        max:400
     },
     gender: {
         type: String,
@@ -56,7 +60,9 @@ const userSchema = new mong.Schema({
         default: 'si',
     },
     targetWeight: {
-        type: NUmber,
+        type:Number,
+        min:20,
+        max:400
     },
     description: {
         type: String,
