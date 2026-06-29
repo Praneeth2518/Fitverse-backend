@@ -6,14 +6,16 @@ import {
     getWorkout,
     updateWorkout
 } from "../controllers/workout.controller.js";
+import {authMiddleware} from "../middlewares/auth.middleware.js";
+
 
 const workoutRouter = Router();
 
 workoutRouter.get('/all', getAllWorkouts);
 
-workoutRouter.post('/:id', createWorkout);
-workoutRouter.get('/:id', getWorkout);
-workoutRouter.put('/:id', updateWorkout);
-workoutRouter.delete('/:id', deleteWorkout);
+workoutRouter.post('/', authMiddleware, createWorkout);
+workoutRouter.get('/:id', authMiddleware, getWorkout);
+workoutRouter.put('/:id', authMiddleware, updateWorkout);
+workoutRouter.delete('/:id', authMiddleware, deleteWorkout);
 
 export default workoutRouter;
