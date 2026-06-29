@@ -36,7 +36,7 @@ export async function signUp(req, res, next) {
             success: true,
             message: "User Created Successfully",
             data: {
-                token,
+                token: token,
                 user: newUser
             }
         })
@@ -46,7 +46,34 @@ export async function signUp(req, res, next) {
 }
 
 export async function signIn(req, res, next) {
+    try {
+        const user = await User.findOne({ email: req.body.email }).select("+password");
 
+        if(!user) {
+            throw new ApiError(404, "User Not Found");
+        }
+
+        const isMatch = await bcrypt.compare(req.body.password, user.password);
+
+        if(!isMatch) {
+            throw new ApiError(401, "Unauthorized Access");
+        }
+
+        const token = jwt.sign({ userId: user._id, tokenVersion: user.tokenVersion }, JWT_SECRET, { expiresIn: JWT_EXPIRES_IN });
+
+        user.password = undefined;
+
+        res.status(201).send({
+            success: true,
+            message: "User signed in Successfully",
+            data: {
+                token: token,
+                user: user
+            }
+        })
+    } catch(e) {
+        next(e);
+    }
 }
 
 export async function signOut(req, res, next) {
@@ -54,5 +81,19 @@ export async function signOut(req, res, next) {
 }
 
 export async function signOutAllDevices(req, res, next) {
+    try {
+        const user = await User.findById(req.user._id);
 
+        user.tokenVersion += 1;
+
+        await user.save();
+
+        res.status(201).send({
+            success: true,
+            message: "All Devices Logged Out"
+        })
+
+    } catch(e) {
+        next(e);
+    }
 }
