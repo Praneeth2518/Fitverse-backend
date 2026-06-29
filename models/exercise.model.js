@@ -4,7 +4,8 @@ const exerciseSchema = new mong.Schema({
     name: {
         type: String,
         required: [true, 'name is required'],
-        trim: true
+        trim: true,
+        unique: true
     },
     category: {
         type: String,
@@ -19,7 +20,26 @@ const exerciseSchema = new mong.Schema({
         ],
         required: true,
     },
-    muscleGroup: {
+    primaryMuscleGroup: {
+        type: [String],
+        enum: [
+            "Chest",
+            "Back",
+            "Shoulders",
+            "Biceps",
+            "Triceps",
+            "Forearms",
+            "Abs",
+            "Obliques",
+            "Quadriceps",
+            "Hamstrings",
+            "Glutes",
+            "Calves",
+            "Full Body",
+        ],
+        default: [],
+    },
+    secondaryMuscleGroup: {
         type: [String],
         enum: [
             "Chest",
@@ -39,7 +59,7 @@ const exerciseSchema = new mong.Schema({
         default: [],
     },
     equipment: {
-        type: String,
+        type: [String],
         enum: [
             "None",
             "Dumbbell",
@@ -52,7 +72,30 @@ const exerciseSchema = new mong.Schema({
             "Bench",
             "Other",
         ],
-        default: "None",
+        default: [],
+    },
+    force: {
+        type: String,
+        enum: ["Push", "Pull", "Static"]
+    },
+    mechanic: {
+        type: String,
+        enum: ["Compound", "Isolation"]
+    },
+    movementPattern: {
+        type: String,
+        enum: [
+            "Horizontal Push",
+            "Vertical Push",
+            "Horizontal Pull",
+            "Vertical Pull",
+            "Squat",
+            "Hinge",
+            "Lunge",
+            "Carry",
+            "Rotation",
+            "Core"
+        ]
     },
     difficulty: {
         type: String,

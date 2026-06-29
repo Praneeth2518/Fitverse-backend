@@ -54,12 +54,8 @@ const workoutSchema = new mong.Schema(
             type: String,
             required: true,
         },
-        owner: {
-            type: String,
-            required: true,
-        },
         ownerId: {
-            type : mong.Schema.Types.ObjectId,
+            type: mong.Schema.Types.ObjectId,
             required: true,
         }
     },
@@ -67,6 +63,8 @@ const workoutSchema = new mong.Schema(
         timestamps: true,
     }
 );
+
+
 
 const Workout = mong.model("Workout", workoutSchema);
 
