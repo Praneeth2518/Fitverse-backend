@@ -7,5 +7,6 @@ export const {
     DB_URI,
     JWT_SECRET,
     ADMIN_KEY,
-    JWT_EXPIRES_IN
+    JWT_EXPIRES_IN,
+    GROQ_API_KEY
 } = process.env;
