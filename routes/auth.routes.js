@@ -2,7 +2,6 @@ import { Router } from 'express';
 import {signIn, signOut, signOutAllDevices, signUp} from "../controllers/auth.controller.js";
 import { authMiddleware } from '../middlewares/auth.middleware.js';
 
-
 const authRouter = Router();
 
 authRouter.post('/sign-up', signUp);
