@@ -5,7 +5,8 @@ const exerciseSchema = new mong.Schema({
         type: String,
         required: [true, 'name is required'],
         trim: true,
-        unique: true
+        unique: true,
+        select: false
     },
     category: {
         type: String,
@@ -19,6 +20,7 @@ const exerciseSchema = new mong.Schema({
             "Other",
         ],
         required: true,
+        select: false
     },
     primaryMuscleGroup: {
         type: [String],
@@ -38,6 +40,7 @@ const exerciseSchema = new mong.Schema({
             "Full Body",
         ],
         default: [],
+        select: false
     },
     secondaryMuscleGroup: {
         type: [String],
@@ -57,6 +60,7 @@ const exerciseSchema = new mong.Schema({
             "Full Body",
         ],
         default: [],
+        select: false
     },
     equipment: {
         type: [String],
@@ -73,14 +77,17 @@ const exerciseSchema = new mong.Schema({
             "Other",
         ],
         default: [],
+        select: false
     },
     force: {
         type: String,
-        enum: ["Push", "Pull", "Static"]
+        enum: ["Push", "Pull", "Static"],
+        select: false
     },
     mechanic: {
         type: String,
-        enum: ["Compound", "Isolation"]
+        enum: ["Compound", "Isolation"],
+        select: false
     },
     movementPattern: {
         type: String,
@@ -95,32 +102,39 @@ const exerciseSchema = new mong.Schema({
             "Carry",
             "Rotation",
             "Core"
-        ]
+        ],
+        select: false
     },
     difficulty: {
         type: String,
         enum: ["Beginner", "Intermediate", "Advanced"],
         default: "Beginner",
+        select: false
     },
     description: {
         type: String,
         trim: true,
         maxlength: 1000,
+        select: false
     },
     instructions: {
         type: [String],
         default: [],
+        select: false
     },
     imageUrl: {
         type: String,
         trim: true,
+        select: false
     },
     videoUrl: {
         type: String,
         trim: true,
+        select: false
     },
     isEquipmentBased: {
         type: Boolean,
+        select: false
     }
 }, {
     timestamps: true

@@ -320,7 +320,6 @@ export async function createWorkoutAI(req, res, next) {
             rest: ex.rest
         }));
 
-        console.log(req.user);
         data.ownerId = req.user._id;
         const newWorkout = await Workout.create(data);
 
